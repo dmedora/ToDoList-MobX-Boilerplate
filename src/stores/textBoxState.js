@@ -1,15 +1,18 @@
-import { observable } from 'mobx';
+import { observable, action } from 'mobx';
 import appState from './appState';
 
 class textBoxState {
-    text = '';
+    @observable text = '';
     // what MobX tag do you need here (hint it's imported). Why do you want to mark this as observable?
     // Do you always mark your variables as observable?
 
+    @action
     handleChange = (e) => {
         // use e.target.value to extract text!
+        this.text = e.target.value
     };
 
+    @action
     handleSubmit = (e) => {
         // stops default action from form element from triggering
         e.preventDefault();
@@ -21,10 +24,13 @@ class textBoxState {
         }
 
         // create new task object
+        let taskObj = {"text": this.text, "isDone": false, "id": uuid()};
 
         // reset text to empty string
+        this.text = '';
 
         // appState.addTask(NEW_TASK);
+        appState.addTask(taskObj);
     };
 
 }

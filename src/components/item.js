@@ -9,8 +9,9 @@ class Item extends Component {
         // fill in
     };
 
-    deleteTask = () => {
+    deleteTask = (id) => {
         // fill in
+        return this.props.appState.deleteTask(id);
     };
 
     render() {
@@ -18,9 +19,9 @@ class Item extends Component {
             <div className="task">
 
                 {/* this is a popular way of changing styling - depending on a boolean value, you can change the class name */}
-                <div className={this.props.isDone ? "text completed done" : "text completed notdone"} onClick={{/*SOMETHING_HERE: HINT THE FUNCTION IS ABOVE.. OR YOU COULD DIRECTLY IMPORT FUNCTION FROM STORE AND CALL IT HERE */}}>
+                <div className={this.props.isDone ? "text completed done" : "text completed notdone"} onClick={() => {this.props.appState.changeIsDone(this.props.id)}}>
                     <p>{this.props.text}</p>
-                    <div className="delete-icon" onClick={{/*SOMETHING_HERE: HINT THE FUNCTION IS ABOVE OR YOU COULD CALL THE FUNCTION FROM THE STORE AND PUT IT HERE */}}>
+                    <div className="delete-icon" onClick={() => {this.deleteTask(this.props.id)}}>
                         X
                     </div>
                     {/* Note in the event handler onClick, I don't have to write onClick={() => this.deleteTask()}. ES6 allows me to write
